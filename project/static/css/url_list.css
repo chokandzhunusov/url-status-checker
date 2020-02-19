@@ -1,0 +1,13 @@
+#urls {
+    margin-top: 5%;
+}
+
+.url {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    height: 30px;
+    margin-left: 10%;
+    background-color: red;
+}
