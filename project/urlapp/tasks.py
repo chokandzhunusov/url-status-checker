@@ -20,7 +20,3 @@ def update_url_statuses(user_pk):
         logger.info(r.status_code)
 
     return
-
-
-is_nice = True
-state = "nice" if is_nice else "not nice"

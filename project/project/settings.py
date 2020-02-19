@@ -33,7 +33,7 @@ SECRET_KEY = '38m!cpmc7&w-gh7+852vc2vh4e_tp_&@nyrn=@n*wk9605h-bq'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -88,8 +88,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'urlapp',
-        'USER': 'chokan',
-        'HOST': 'localhost',
+        'USER': 'postgres',
+        'HOST': 'db',
         'PORT': '5432',
     }
 }
@@ -136,12 +136,13 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [str(ROOT_DIR.path("static"))]
 
 LOGIN_REDIRECT_URL = '/urls'
+REGISTER_REDIRECT_URL = '/urls'
 
 CRISPY_TEMPLATE_PACK="bootstrap4"
 
 # CELERY STUFF
-BROKER_URL = 'redis://localhost:6379'
-CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+BROKER_URL = 'redis://redis:6379'
+CELERY_RESULT_BACKEND = 'redis://redis:6379'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
