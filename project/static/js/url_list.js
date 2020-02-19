@@ -1,10 +1,9 @@
 let start;
-let initialInterval = 4000;
+let initialInterval = 4;
 let updatedUrls
 
 $(document).ready(function() {
-    requestStatus();
-    // start = setInterval(requestStatus, initialInterval);
+    start = setInterval(requestStatus, initialInterval * 1000);
 });
 
 function requestStatus() {
@@ -17,7 +16,7 @@ function requestStatus() {
            updatedUrls = getUpdatedStatuses();
         },
         error : function(request,error) {
-            console.log(error);
+            alert(error);
         }
     });
 }
@@ -28,36 +27,43 @@ function getUpdatedStatuses() {
         type : 'POST',
         data : {},
         success : function(data) {
-
-            for (i=0; i < data.length; i++){
-                console.log(data[i]['pk']);
+            for (let i=0; i < data.length; i++){
+                if (data[i]['fields']['status']) {
+                    $('#' + data[i]['pk']).css('background-color', 'green');
+                } else {
+                    $('#' + data[i]['pk']).css('background-color', 'red');
+                }
             }
         },
         error : function(request,error) {
-            console.log(error);
+            alert(error);
         }
     });
-}
-
-function changeInterval(){
-    clearInterval(start);
-    var newInterval = $('#intervalVal').val();
-    start = setInterval(requestStatus, newInterval);
 }
 
 function addUrl() {
     var newUrl = $('#urlVal').val();
 
-    $.ajax({
-        url : 'http://localhost:8000/urls/',
-        type : 'POST',
-        data : {'newUrl': newUrl},
-        success : function(data) {
-           console.log(data);
+    if (newUrl.startsWith('http') || newUrl.startsWith('www')) {
+        $.ajax({
+            url : 'http://localhost:8000/urls/',
+            type : 'POST',
+            data : {'newUrl': newUrl},
+            success : function(data) {
+               alert('Url was added');
 
-        },
-        error : function(request,error) {
-            console.log(error);
-        }
-    });
+            },
+            error : function(request,error) {
+                alert(error);
+            }
+        });
+    } else {
+        alert("please enter valid URL")
+    }
+}
+
+function changeInterval(){
+    clearInterval(start);
+    let newInterval = $('#intervalVal').val() * 1000;
+    start = setInterval(requestStatus, newInterval);
 }

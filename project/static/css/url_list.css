@@ -11,3 +11,8 @@
     margin-left: 10%;
     background-color: red;
 }
+
+#changeInterval, #addUrl {
+    margin-left: 40%;
+    margin-top: 20px;
+}

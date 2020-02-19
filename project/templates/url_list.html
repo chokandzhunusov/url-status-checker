@@ -3,22 +3,21 @@
 {% block content %}
 
 <div id="changeInterval">
-    <input type="text" id="intervalVal">
+    <input type="text" id="intervalVal" placeholder="seconds">
     <button onclick="changeInterval()">Change Interval</button>
 </div>
 
 <div id="addUrl">
-    <input type="text" id="urlVal">
+    <input type="url" id="urlVal">
     <button onclick="addUrl()">Add url</button>
 </div>
 
 <div id="urls">
     {% for url in urls %}
-        <div class="url">
+        <div class="url" id={{url.pk}}>
             {{ url }}
         </div>
     {% endfor %}
 </div>
-
 
 {% endblock content %}
